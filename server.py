@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""This is a constructor for the Printer class."""
+"""This is a constructor for the Server class."""
 
 
-class Printer:
+class Server:
     def __init__(self, ppm):
         self.page_rate = ppm
         self.current_task = None

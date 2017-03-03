@@ -3,7 +3,7 @@
 """This program DOES SOME STUFF.
 """
 
-from printer import Printer
+from server import Printer
 from server import Server
 
 
@@ -14,6 +14,8 @@ def downloadData(url):
 
 
 def simulateOneServer(input_file):
+
+
     pass
 
 
@@ -23,6 +25,19 @@ def simulateManyServers():
 
 def main():
     simulateOneServer(input_file)
+
+    data = downloadData(url)
+    result = saveData(data)
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('url', help='Enter the data url')
+    args = parser.parse_args()
+
+    if args.url:
+        csvdata = download_data(args.url)
+        process_data(csvdata)
+    else:
+        print 'error'
     pass
 
 if __name__ == '__main__':
