@@ -7,6 +7,12 @@ from printer import Printer
 from server import Server
 
 
+def downloadData(url):
+    response = urllib2.urlopen(url)
+    data = response.read()
+    return data
+
+
 def simulateOneServer(input_file):
     pass
 

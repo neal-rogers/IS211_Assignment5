@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""This is a constructor for the PRinter class."""
+"""This is a constructor for the Printer class."""
 
 
 class Printer:
