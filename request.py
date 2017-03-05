@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """This is a constructor for the Request class."""
 
+
 class Request:
     def __init__(self, time):
         self.timestamp = time
@@ -14,4 +15,4 @@ class Request:
         return self.pages
 
     def wait_time(self, current_time):
-        return current_time = self.timestamp
+        return current_time - self.timestamp

@@ -14,7 +14,7 @@ def downloadData(url):
 
 def saveData(file_data):
     input_file = file_data.split()
-    output_file = open("data.txt", "w")
+    output_file = open("data.csv", "w")
 
     for line in input_file:
         output_file.write(line)

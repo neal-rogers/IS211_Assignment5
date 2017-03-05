@@ -4,8 +4,7 @@
 """
 
 
-import csv
-import time
+import random
 
 
 class Queue:
@@ -16,7 +15,7 @@ class Queue:
         return self.items == []
 
     def enqueue(self, item):
-        self.items.insert(0, item)
+        self.items.insert(0,item)
 
     def dequeue(self):
         return self.items.pop()
@@ -24,19 +23,9 @@ class Queue:
     def size(self):
         return len(self.items)
 
-class Request:
-    def __init__(self, time):
-        self.timestamp = time
-        self.pages = random.randrange(1, 21)
 
-    def get_stamp(self):
-        return self.timestamp
-
-    def wait_time(self, current_time):
-        return current_time - self.timestamp
-
-class Server:
-    def __init__(self, ):
+class Printer:
+    def __init__(self, ppm):
         self.page_rate = ppm
         self.current_task = None
         self.time_remaining = 0
@@ -58,36 +47,46 @@ class Server:
         self.time_remaining = new_task.get_pages() * 60 / self.page_rate
 
 
-# This function needs to accept the input_file
-def simulateOneServer(num_seconds, ):
-    lab_printer = Server()
+class Task:
+    def __init__(self, time):
+        self.timestamp = time
+        self.pages = random.randrange(1, 21)
+
+    def get_stamp(self):
+        return self.timestamp
+
+    def get_pages(self):
+        return self.pages
+
+    def wait_time(self, current_time):
+        return current_time - self.timestamp
+
+
+def simulation(num_seconds, pages_per_minute):
+    lab_printer = Printer(pages_per_minute)
     print_queue = Queue()
     waiting_times = []
-
     for current_second in range(num_seconds):
-
         if new_print_task():
             task = Task(current_second)
             print_queue.enqueue(task)
-
         if (not lab_printer.busy()) and (not print_queue.is_empty()):
-            new.task - print_queue.dequeue()
+            next_task = print_queue.dequeue()
             waiting_times.append(next_task.wait_time(current_second))
-            lab_printer.startNext(next_task)
+            lab_printer.start_next(next_task)
 
         lab_printer.tick()
 
-        average_wait = sum(waiting_times) / len(waiting_times)
-        print("Average Wait %6.2f secs %3d tasks remaining." % (average_wait, print_queue.size()))
-
-def simulateManyServers():
-    pass
+    average_wait = sum(waiting_times) / len(waiting_times)
+    print("Average Wait %6.2f secs %3d tasks remaining." % (average_wait, print_queue.size()))
 
 
-def main():
-    simulateOneServer(input_file)
+def new_print_task():
+    num = random.randrange(1, 181)
+    if num == 180:
+        return True
+    else:
+        return False
 
-
-
-if __name__ == '__main__':
-    main()
+for i in range(10):
+    simulation(3600, 5)
